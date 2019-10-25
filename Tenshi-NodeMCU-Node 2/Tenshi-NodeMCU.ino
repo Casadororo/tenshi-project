@@ -8,10 +8,9 @@
 
 String nodeId = "IoNEEAiafnI142QKeR9P";
 FirebaseData con;
-const int LM35 = A0;
-float temperatura;
+//bool led, porta;
+//String switchs[10];
 int ports[6] = {1, 2, 3, 4, 5, 6};
-int cont = 0;
 
 void setup()
 {
@@ -116,25 +115,92 @@ void loop() {
       Serial.println();
     }
   }
-//-----------------------------------------------------------
 
-if(cont == 0){
-temperatura = (float(analogRead(LM35))*3.3/(1023))/0.01;
-Serial.print("Temperatura: ");
-Serial.println(temperatura);
-if(Firebase.setDouble(con, "/node/" + nodeId + "/temp", temperatura)){
-  Serial.println("PASSED");
-      Serial.println("PATH: " + con.dataPath());
-      Serial.println("TYPE: " + con.dataType());
-      Serial.println("ETag: " + con.ETag());
-  }else{
-  Serial.println("FAILED");
-  Serial.println("REASON: " + con.errorReason());
-  Serial.println("------------------------------------");
-  Serial.println();
-  }
-  cont =5;
-}
-else
-cont -=1;
+
+  /*
+    if (Firebase.getString(con, "/users/" + uid + "/switchs")) {
+    String switchRetrived = con.stringData();
+    Serial.println("" + switchRetrived);
+    int index = 0;
+    int cont = 0;
+    while (switchRetrived.indexOf(".", index) != -1) {
+      int tempIndex = switchRetrived.indexOf(".", index);
+      switchs[cont] = switchRetrived.substring(index, tempIndex);
+      ports[cont] = switchRetrived.substring(tempIndex + 2, tempIndex + 3).toInt();
+      index = tempIndex + 4;
+      cont++;
+    }
+    for (int x = 0; x < cont; x++) {
+      Serial.println("Switch:" + switchs[x] + " Port:" + ports[x]);
+      if (Firebase.getBool(con, "/users/" + uid + "/" + switchs[x] + "/stats")) {
+        Serial.println("PASSED");
+        Serial.println("PATH: " + con.dataPath());
+        Serial.println("TYPE: " + con.dataType());
+        Serial.print("VALUE: ");
+        if (con.dataType() == "int")
+          Serial.println(con.intData());
+        else if (con.dataType() == "float")
+          Serial.println(con.floatData(), 5);
+        else if (con.dataType() == "boolean")
+          Serial.println(con.boolData() == 1 ? "true" : "false");
+        else if (con.dataType() == "string")
+          Serial.println(con.stringData());
+        else if (con.dataType() == "json")
+          Serial.println(con.jsonData());
+        Serial.println("------------------------------------");
+        Serial.println();
+
+        switch (ports[x]) {
+          case 1:
+            if (con.boolData())
+              digitalWrite(D1, HIGH);
+            else
+              digitalWrite(D1, LOW);
+            break;
+
+          case 2:
+            if (con.boolData())
+              digitalWrite(D2, HIGH);
+            else
+              digitalWrite(D2, LOW);
+            break;
+
+          case 3:
+            if (con.boolData())
+              digitalWrite(D3, HIGH);
+            else
+              digitalWrite(D3, LOW);
+            break;
+
+          case 4:
+            if (con.boolData())
+              digitalWrite(D4, HIGH);
+            else
+              digitalWrite(D4, LOW);
+            break;
+
+          case 5:
+            if (con.boolData())
+              digitalWrite(D5, HIGH);
+            else
+              digitalWrite(D5, LOW);
+            break;
+
+          case 6:
+            if (con.boolData())
+              digitalWrite(D6, HIGH);
+            else
+              digitalWrite(D6, LOW);
+            break;
+        }
+      }
+      else
+      {
+        Serial.println("FAILED");
+        Serial.println("REASON: " + con.errorReason());
+        Serial.println("------------------------------------");
+        Serial.println();
+      }
+    }
+    }*/
 }
