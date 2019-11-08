@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase:{
+    apiKey: "AIzaSyAV2DOf46tDef2yjcHo11wiUcU-UZc3MrY",
+    authDomain: "tenshi-project.firebaseapp.com",
+    databaseURL: "https://tenshi-project.firebaseio.com",
+    projectId: "tenshi-project",
+    storageBucket: "tenshi-project.appspot.com",
+    messagingSenderId: "414445549676",
+    appId: "1:414445549676:web:a84f008f1f09ea74"
+  }
 };
 
 /*

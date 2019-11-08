@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CasasService } from '../../services/casas.service'
+import { Subscription } from 'rxjs';
+import { Casas } from '../../interfaces/casas';
 
 @Component({
   selector: 'app-menu',
@@ -7,6 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuPage implements OnInit {
   
+  private casasSubscription: Subscription;
+  public casas = new Array<Casas>();
+
   pages = [
     {
       title: 'Main',
@@ -17,25 +23,22 @@ export class MenuPage implements OnInit {
       title: 'Casas',
       open: true,
       children: [
-        {
-        title: 'Casa1',
-        url: '/menu/tabs',
-        homeId: "123",
-        icon: 'logo-ionic'
-      },
-      {
-        title: 'Casa2',
-        url: '/menu/tabs',
-        homeId: "654",
-        icon: 'logo-google'
-      }
       ]
     }
   ];
 
-  constructor() { }
+  constructor(private casasService:CasasService) {
+    this.casasService.createCollection("oi");
+
+    this.casasSubscription = this.casasService.getCasas().subscribe(data => {
+      this.casas = data;
+      console.log(this.casas);
+      this.pages[1].children = this.casas;
+    });
+   }
 
   ngOnInit() {
+
   }
 
 }
