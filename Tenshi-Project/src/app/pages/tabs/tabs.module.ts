@@ -9,9 +9,15 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: '',
-    component: TabsPage
-  }
+    path: 'option',
+    component: TabsPage,
+    children: [
+      { path: 'tabHome', loadChildren: '../tabs/home/home.module#HomePageModule' },
+      { path: 'tabMembros', loadChildren: '../tabs/membros/membros.module#MembrosPageModule' },
+      { path: 'tabSettings', loadChildren: '../tabs/settings/settings.module#SettingsPageModule' }
+    ]
+  },
+  { path: '', pathMatch: 'full', redirectTo: 'option/tabHome' }
 ];
 
 @NgModule({
@@ -23,4 +29,4 @@ const routes: Routes = [
   ],
   declarations: [TabsPage]
 })
-export class TabsPageModule {}
+export class TabsPageModule { }

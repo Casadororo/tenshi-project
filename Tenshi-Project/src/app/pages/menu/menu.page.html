@@ -1,7 +1,7 @@
 <ion-menu menuId="mainMenu" contentId="content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Awesome avocado menu</ion-title>
+      <ion-title>Tenshi-Project</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -11,13 +11,13 @@
 
       <ion-menu-toggle *ngIf="p.url">
         <ion-item [routerLink]="p.url" routerDirection="root" routerLinkActive="active">
-          <ion-icon slot="start" [name] = "p.icon"></ion-icon>
+          <ion-icon slot="start" [name]="p.icon"></ion-icon>
           <ion-label>{{p.title}}</ion-label>
         </ion-item>
       </ion-menu-toggle>
 
-      <ion-item button *ngIf="p.children?.length > 0" (click)="p.open = !p.open" 
-        [class.active-parent]="p.open" detail="false">
+      <ion-item button *ngIf="p.children?.length > 0" (click)="p.open = !p.open" [class.active-parent]="p.open"
+        detail="false">
 
         <ion-icon slot="start" name="arrow-dropright" *ngIf="!p.open"></ion-icon>
         <ion-icon slot="start" name="arrow-dropdown" *ngIf="p.open"></ion-icon>
@@ -25,20 +25,31 @@
 
       </ion-item>
 
-        <ion-list *ngIf="p.open">
-          <ion-menu-toggle>
-            <ion-item class="casa-item" *ngFor="let c of p.children" [routerLink]="[ '/menu/tabs', c.homeId]" routerDirection="root" routerLinkActive="active">
-              <ion-icon slot="start" name="logo-ionic" *ngIf="!c.icon"></ion-icon>
-              <ion-icon slot="start" [name]="c.icon" *ngIf="c.icon"></ion-icon>
-              <ion-label>{{c.title}}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-        
+      <ion-list *ngIf="p.open">
+        <ion-menu-toggle>
+          <ion-item class="casa-item" *ngFor="let c of p.children" [routerLink]="[ '/menu/tabs', c.homeId]"
+            routerDirection="root" routerLinkActive="active">
+            <ion-icon slot="start" name="logo-ionic" *ngIf="!c.icon"></ion-icon>
+            <ion-icon slot="start" [name]="c.icon" *ngIf="c.icon"></ion-icon>
+            <ion-label>{{c.title}}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+
     </div>
 
   </ion-content>
 
+  <ion-footer>
+    <ion-toolbar>
+      <ion-button color="primary" (click)="createCasa()" class="border" expand="block">
+        <ion-icon slot="start" name="home"></ion-icon>
+        Criar uma nova casa
+      </ion-button>
+    </ion-toolbar>
+  </ion-footer>
+
 </ion-menu>
 
-<ion-router-outlet id="content" main><ion-router-outlet>
+<ion-router-outlet id="content" main>
+  <ion-router-outlet>

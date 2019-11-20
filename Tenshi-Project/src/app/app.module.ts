@@ -12,6 +12,9 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { LoginPageModule } from './modals/login/login.module';
+import { CadPageModule } from './modals/cad/cad.module';
+import { ProfilePageModule } from './modals/profile/profile.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +25,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    LoginPageModule,
+    CadPageModule,
+    ProfilePageModule
   ],
   providers: [
     StatusBar,

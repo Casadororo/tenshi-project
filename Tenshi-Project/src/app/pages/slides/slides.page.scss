@@ -1,0 +1,25 @@
+ion-slide {
+    height: 95vh;
+    flex-direction: column;
+}
+
+ion-slides{
+    --bullet-background: #39375b;
+    --bullet-background-active: var(--ion-color-success);;
+}
+
+ion-button{
+    --background: #ffffff;
+    --color: #000000;
+    --border-color: #000000;
+    --border-width: 1px;
+    --border-style: solid;
+    --border-radius: 20px;
+    --width: 160px;
+    --height: 160px;
+}
+
+ion-thumbnail{
+    --border-radius: 18px;
+    --size: 175px;
+}

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ProfilePage } from 'src/app/modals/profile/profile.page';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPage implements OnInit {
 
-  constructor() { }
+  constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {
   }
 
+  async openProfile(){
+    const profileModal = await this.modalCtrl.create({
+      component: ProfilePage
+    });
+    profileModal.present();
+  }
 }

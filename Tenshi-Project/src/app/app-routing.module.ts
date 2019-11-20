@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
+import { LoggedGuard } from './guards/logged.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'menu', pathMatch: 'full' },
-  { path: 'menu', loadChildren: './pages/menu/menu.module#MenuPageModule' }
-
+  { path: '', redirectTo: 'slides', pathMatch: 'full' },
+  { path: 'menu', loadChildren: './pages/menu/menu.module#MenuPageModule', canActivate:[AuthGuard] },
+  { path: 'slides', loadChildren: './pages/slides/slides.module#SlidesPageModule', canActivate:[LoggedGuard]},
 ];
 
 @NgModule({

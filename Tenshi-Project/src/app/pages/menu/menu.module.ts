@@ -6,20 +6,21 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { MenuPage } from './menu.page';
+import { AuthGuard } from 'src/app/guards/auth.guard';
+import { LoggedGuard } from 'src/app/guards/logged.guard';
 
 const routes: Routes = [
   {
-    path:'',
-    redirectTo:'/menu/main',
+    path: '',
+    redirectTo: '/menu/main',
     pathMatch: 'full'
   },
   {
     path: '',
     component: MenuPage,
-    children:[
-        { path: 'main', loadChildren: '../main/main.module#MainPageModule' },
-        { path: 'home', loadChildren: '../tabs/home/home.module#HomePageModule' },
-        { path: 'tabs/:id', loadChildren: '../tabs/tabs.module#TabsPageModule' }
+    children: [
+      { path: 'main', loadChildren: '../main/main.module#MainPageModule' },
+      { path: 'tabs/:id', loadChildren: '../tabs/tabs.module#TabsPageModule' }
     ]
   }
 ];
@@ -33,4 +34,4 @@ const routes: Routes = [
   ],
   declarations: [MenuPage]
 })
-export class MenuPageModule {}
+export class MenuPageModule { }
