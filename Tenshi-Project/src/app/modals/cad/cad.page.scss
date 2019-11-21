@@ -1,0 +1,24 @@
+ion-grid{
+    height:100%;
+}
+
+ion-col{
+    text-align: center;
+    align-self: center;
+}
+
+ion-row{
+    height: 90%;
+    align-items: center;
+}
+
+ion-item{
+    --highlight-height:1px;
+    --highlight-color-focused: var(--ion-color-success);; 
+    --highlight-color-valid: var(--ion-color-success);
+}
+
+.border{
+    border: solid 2px var(--ion-color-primary);;
+    border-radius: 10px;
+}

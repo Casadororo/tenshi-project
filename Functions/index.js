@@ -6,29 +6,34 @@ const firestore = admin.firestore();
 
 exports.createUserDb = functions.auth.user().onCreate((user) => {
     const uid = user.uid;
-    firestore.collection('users').doc(uid).set({ welcome: "Welcome" });
+    const email = user.email;
+    const displayName = user.displayName;
+    firestore.collection('users').doc(uid).set({ email: email, displayName: displayName });
 });
 
 exports.updatePort = functions.firestore
-    .document('homes/{homeId}/Configs/{configId}')
-    .onUpdate((change, context) => {
+    .document('nodes/{nodeId}/ports/{portId}')
+    .onWrite((change, context) => {
+        //All Data
         const newValue = change.after.data();
-        //const stats = newValue.stats;
-        const nodeId = newValue.nodeId;
-        const portId = newValue.port;
+        //Values
+        const nodeId = context.params.nodeId;
+        const portId = context.params.portId;
         const stats = newValue.stats;
-        //const updates = {'stats': newValue};
+
         admin.database().ref('node/' + nodeId + '/' + portId).set({
             'stats': stats
         }
         );
-
     });
 
-exports.updateTemp = functions.database.ref('/').onUpdate((snap, context) => {
-      if (context.authType === 'ADMIN') {
-        // do something
-      } else if (context.authType === 'USER') {
-        console.log(snap.val(), 'written by', context.auth.uid);
-      }
-    });
+exports.updateFireStore = functions.database.ref('node/{nodeId}/{portId}/stats').onWrite((change, context) => {
+    //Values
+    const nodeId = context.params.nodeId;
+    const portId = context.params.portId;
+    const stats = change.after.val();
+
+    firestore.collection('nodes/' + nodeId + '/ports').doc(portId).set({
+        stats: stats
+    })
+});

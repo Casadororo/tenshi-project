@@ -32,7 +32,7 @@ export class MenuPage implements OnInit {
 
     this.casasSubscription = this.casasService.getCasas().subscribe(data => {
       this.casas = data;
-      console.log(this.casas);
+      //console.log(this.casas);
       this.pages[1].children = this.casas;
     });
    }
