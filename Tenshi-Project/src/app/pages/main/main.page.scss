@@ -1,0 +1,32 @@
+ion-grid{
+    height:100%;
+}
+
+ion-col{
+    text-align: center;
+    align-self: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+ion-row{
+    height: 90%;
+    align-items: center;
+}
+
+
+ion-thumbnail{
+    --size: 250px;
+    align-items: center;
+}
+
+ion-content{
+    --background: #3F7B62;
+}
+
+ion-img{
+    text-align: center;
+    align-self: center;
+    align-items: center;
+}

@@ -15,6 +15,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { LoginPageModule } from './modals/login/login.module';
 import { CadPageModule } from './modals/cad/cad.module';
 import { ProfilePageModule } from './modals/profile/profile.module';
+import { SwitchConfigPageModule } from './modals/switch-config/switch-config.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +29,8 @@ import { ProfilePageModule } from './modals/profile/profile.module';
     AngularFirestoreModule,
     LoginPageModule,
     CadPageModule,
-    ProfilePageModule
+    ProfilePageModule,
+    SwitchConfigPageModule
   ],
   providers: [
     StatusBar,

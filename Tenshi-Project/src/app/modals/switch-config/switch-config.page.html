@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- 
+      <ion-buttons slot="start">
+        <ion-button (click)="closeModal()">
+          <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    -->
+    <ion-title>Configurações do Switch</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" fullscreen>
+  <ion-toolbar>
+  </ion-toolbar>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input style="text-align: right;" type="text" [(ngModel)]="switch.name" placeholder="Nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Control</ion-label>
+      <ion-input style="text-align: right;" type="text" [(ngModel)]="switch.nodeId" placeholder="Control"></ion-input>
+      <!-- 
+      <ion-select placeholder="Control" [(ngModel)]="switch.nodeId">
+          <ion-select-option *ngFor="let node of nodes" value="{{node.nodeId}}">{{node.name}}</ion-select-option>
+        </ion-select>
+      -->
+    </ion-item>
+    <ion-item>
+      <ion-label>Port</ion-label>
+      <ion-select placeholder="Port" [(ngModel)]="switch.port">
+        <ion-select-option value="D0">D0</ion-select-option>
+        <ion-select-option value="D1">D1</ion-select-option>
+        <ion-select-option value="D2">D2</ion-select-option>
+        <ion-select-option value="D3">D3</ion-select-option>
+        <ion-select-option value="D4">D4</ion-select-option>
+        <ion-select-option value="D5">D5</ion-select-option>
+        <ion-select-option value="D6">D6</ion-select-option>
+        <ion-select-option value="D7">D7</ion-select-option>
+        <ion-select-option value="D8">D8</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="saveSwitch()">
+        <ion-icon slot="icon-only" name="save"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" *ngIf="switch.id">
+      <ion-button (click)="deleteSwitch()">
+        <ion-icon color="danger" name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

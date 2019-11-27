@@ -8,6 +8,8 @@ import { map } from 'rxjs/operators';
 import { Node } from 'src/app/interfaces/node';
 import { Port } from 'src/app/interfaces/port';
 import { PortService } from 'src/app/services/port.service';
+import { ModalController } from '@ionic/angular';
+import { SwitchConfigPage } from 'src/app/modals/switch-config/switch-config.page';
 
 @Component({
   selector: 'app-home',
@@ -34,8 +36,34 @@ export class HomePage implements OnInit {
   public nodes: Node[] = [];
   private port: Port[] = [];
 
-  constructor(private afs: AngularFirestore, private dataService: DataService, private portService: PortService) {
+  constructor(private afs: AngularFirestore, private dataService: DataService, private portService: PortService, private modalCtrl:ModalController) {
     this.houseId = dataService.getHouseId();
+  }
+
+  async openSwitchConfig(i:Inner){
+    if(i != 'none'){
+    const switchModal = await this.modalCtrl.create({
+      component: SwitchConfigPage,
+      componentProps: {
+        houseId: this.houseId,
+        switch: {
+        id:i.switchId,
+        name:i.name,
+        nodeId:i.nodeId,
+        port:i.port
+        }
+      }
+    });
+    switchModal.present();
+  }else{
+    const switchModal = await this.modalCtrl.create({
+      component: SwitchConfigPage,
+      componentProps: {
+        houseId: this.houseId
+      }
+    });
+    switchModal.present();
+  }
   }
 
   getSwitch() {
@@ -83,8 +111,8 @@ export class HomePage implements OnInit {
 
     this.switchSubscription = this.getSwitch().subscribe(data => {
       this.switchs = data;
-      //console.log("Switch:");
-      //console.log(this.switchs);
+      console.log("Switch:");
+      console.log(this.switchs);
 
       try {
         this.nodeSubscription.unsubscribe();
@@ -110,8 +138,8 @@ export class HomePage implements OnInit {
 
           this.portSubscription = this.getPort().subscribe(dataa => {
             data.port = dataa;
-            //console.log("Node Inside Port");
-            //console.log(this.nodes);
+            console.log("Node Inside Port");
+            console.log(this.nodes);
             this.innerJoin();
           });
 
@@ -160,8 +188,8 @@ export class HomePage implements OnInit {
         });
       });
     }
-    //console.log("Inner:")
-    //log(this.innerData);
+    console.log("Inner:")
+    console.log(this.innerData);
   }
 
   async changePort(nodeId: string, port: string, stats: string) {
