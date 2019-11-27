@@ -8,10 +8,12 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+  private uid:string = "";
 
   constructor(private modalCtrl:ModalController, private authService:AuthService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.uid = await this.authService.getAuth().currentUser.uid;    
   }
 
   closeModal(){

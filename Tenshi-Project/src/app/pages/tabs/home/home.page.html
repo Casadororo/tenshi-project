@@ -1,19 +1,46 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-title>{{houseId}}</ion-title>
+    <ion-toolbar *ngIf="temp">
+        <ion-title>Temperatura</ion-title>
+        <ion-note slot="end">{{temp}}</ion-note>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+                                                                <!-- Loading List -->
+    <ion-list *ngIf="!innerData.length">
+        <ion-item *ngFor="let item of [0, 1, 2]">
+            <ion-avatar slot="end">
+                <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-avatar>
+            <ion-label>
+                <h3>
+                    <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                </h3>
+                <p>
+                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </p>
+                <p>
+                    <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                </p>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+
+                                                                <!-- Real List -->
     <ion-list>
         <ion-list>
             <ion-item-sliding *ngFor="let i of innerData">
-                <ion-item *ngIf="i.ready"(click)="changePort(i.nodeId, i.port,i.stats)">
+                <ion-item *ngIf="i.ready" (click)="changePort(i.nodeId, i.port,i.stats)">
                     <ion-label>
                         {{ i.name }}
                         <p>{{ i.port}}</p>
                     </ion-label>
-                    <ion-note color="primary" slot="end" *ngIf="i.stats">{{ i.stats }}</ion-note>
+                    <ion-icon *ngIf="i.stats == 'false'" slot="end" name="ios-power" class="off"></ion-icon>
+                    <ion-icon *ngIf="i.stats == 'true'" slot="end" name="ios-power" class="on"></ion-icon>
+                    <!-- 
+                        <ion-note color="primary" slot="end" *ngIf="i.stats">{{ i.stats }}</ion-note>
+                     -->
                 </ion-item>
                 <ion-item-options side="end">
                     <ion-item-option color="medium" button [routerLink]="['/menu/details', i.id]">

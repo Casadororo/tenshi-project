@@ -11,6 +11,16 @@ exports.createUserDb = functions.auth.user().onCreate((user) => {
     firestore.collection('users').doc(uid).set({ email: email, displayName: displayName });
 });
 
+exports.updateTemp = functions.database.ref('node/{nodeId}/temp').onWrite((change, context) => {
+    //Values
+    const nodeId = context.params.nodeId;
+    const temp = change.after.val();
+
+    firestore.collection('nodes').doc(nodeId).set({
+        temp: temp
+    })
+});
+
 exports.updatePort = functions.firestore
     .document('nodes/{nodeId}/ports/{portId}')
     .onWrite((change, context) => {

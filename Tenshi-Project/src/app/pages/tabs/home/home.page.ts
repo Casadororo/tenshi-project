@@ -16,6 +16,7 @@ import { PortService } from 'src/app/services/port.service';
 })
 export class HomePage implements OnInit {
   private houseId: string = "";
+  private temp:string;
 
   //Collections
   private switchCollection: AngularFirestoreCollection<Switch>;
@@ -72,6 +73,9 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+
+
+    //Inner --------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //console.log(this.houseId);
     this.switchCollection = this.afs.collection<Switch>('homes/' + this.houseId + '/Configs');
     this.nodeCollection = this.afs.collection<Node>('nodes');

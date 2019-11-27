@@ -16,7 +16,7 @@
         </ion-item>
       </ion-menu-toggle>
 
-      <ion-item button *ngIf="p.children?.length > 0" (click)="p.open = !p.open" [class.active-parent]="p.open"
+      <ion-item button *ngIf="p.children" (click)="p.open = !p.open" [class.active-parent]="p.open"
         detail="false">
 
         <ion-icon slot="start" name="arrow-dropright" *ngIf="!p.open"></ion-icon>
@@ -26,7 +26,21 @@
       </ion-item>
 
       <ion-list *ngIf="p.open">
-        <ion-menu-toggle>
+        
+          <ion-list *ngIf="p.children.length == 0">
+              <ion-item *ngFor="let item of [0]" class="casa-item">
+                  <ion-avatar slot="start">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                  </ion-avatar>
+                  <ion-label>
+                      <h3>
+                          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+                      </h3>
+                  </ion-label>
+              </ion-item>
+          </ion-list>
+
+        <ion-menu-toggle *ngIf="p.children">
           <ion-item class="casa-item" *ngFor="let c of p.children" [routerLink]="[ '/menu/tabs', c.homeId]"
             routerDirection="root" routerLinkActive="active">
             <ion-icon slot="start" name="logo-ionic" *ngIf="!c.icon"></ion-icon>
