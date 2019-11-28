@@ -19,7 +19,7 @@ export class SwitchConfigPage implements OnInit {
     if (navParams.get('switch')) {
       this.switch = navParams.get('switch');
     }
-    console.log(this.switch);
+    //console.log(this.switch);
   }
 
   ngOnInit() {

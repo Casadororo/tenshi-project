@@ -111,8 +111,8 @@ export class HomePage implements OnInit {
 
     this.switchSubscription = this.getSwitch().subscribe(data => {
       this.switchs = data;
-      console.log("Switch:");
-      console.log(this.switchs);
+      //console.log("Switch:");
+      //console.log(this.switchs);
 
       try {
         this.nodeSubscription.unsubscribe();
@@ -138,8 +138,8 @@ export class HomePage implements OnInit {
 
           this.portSubscription = this.getPort().subscribe(dataa => {
             data.port = dataa;
-            console.log("Node Inside Port");
-            console.log(this.nodes);
+            //console.log("Node Inside Port");
+            //console.log(this.nodes);
             this.innerJoin();
           });
 
@@ -188,8 +188,8 @@ export class HomePage implements OnInit {
         });
       });
     }
-    console.log("Inner:")
-    console.log(this.innerData);
+    //console.log("Inner:")
+    //console.log(this.innerData);
   }
 
   async changePort(nodeId: string, port: string, stats: string) {

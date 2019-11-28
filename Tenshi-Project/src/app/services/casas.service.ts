@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Casas } from '../interfaces/casas';
 import { map } from 'rxjs/operators';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,23 @@ export class CasasService {
   private casasMembrosCollection: AngularFirestoreCollection<Casas>;
 
   constructor(private afs: AngularFirestore) { }
-
-  createCollection(uid: string) {
-    this.casasCollection = this.afs.collection<Casas>("homes", ref => ref.where('owner', '==', uid));
+  
+  //Colection Home
+  createHomeCollection() {
+    this.casasCollection = this.afs.collection<Casas>("homes");
   }
 
-  createMembrosCollection(uid: string) {
-    this.casasMembrosCollection = this.afs.collection<Casas>("homes",ref => ref.where("membros", "array-contains", uid));
+  addHome(casa:Casas){
+    return this.casasCollection.add(casa);
+  }
+ 
+  deleteHome(homeId:string){
+    return this.casasCollection.doc(homeId).delete();
+  }
+
+  //Casas Owner - Menu
+  createCollection(uid: string) {
+    this.casasCollection = this.afs.collection<Casas>("homes", ref => ref.where('owner', '==', uid));
   }
 
   getCasas() {
@@ -34,6 +45,11 @@ export class CasasService {
     );
   }
 
+  //Casas Membros - Menu
+  createCasasMembrosCollection(uid: string) {
+    this.casasMembrosCollection = this.afs.collection<Casas>("homes",ref => ref.where("membros", "array-contains", uid));
+  }
+
   getCasasMembros() {
     return this.casasMembrosCollection.snapshotChanges().pipe(
       map(actions => {
@@ -47,4 +63,15 @@ export class CasasService {
     );
   }
 
+  // Membros Casas - Tab
+  getMembros(houseId: string){
+    return this.casasCollection.doc(houseId).valueChanges();
+  }
+
+  updateMembros(casa:Casas){
+    //console.log(casa);
+    return this.casasCollection.doc<Casas>(casa.homeId).update({
+      membros: casa.membros
+    });
+  }
 }

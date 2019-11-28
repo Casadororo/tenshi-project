@@ -6,21 +6,21 @@ import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/fire
   providedIn: 'root'
 })
 export class SwitchService {
-  private productsCollection: AngularFirestoreCollection<Switch>;
+  private switchCollection: AngularFirestoreCollection<Switch>;
 
   constructor(private afs: AngularFirestore) {
   }
 
   createCollection(houseId:String){
-    this.productsCollection = this.afs.collection<Switch>('homes/'+houseId+'/Configs');
+    this.switchCollection = this.afs.collection<Switch>('homes/'+houseId+'/Configs');
   }
 
   getSwitch(id: string) {
-    return this.productsCollection.doc<Switch>(id).valueChanges();
+    return this.switchCollection.doc<Switch>(id).valueChanges();
   }
 
   addSwitch(switchData: Switch) {
-    return this.productsCollection.add({
+    return this.switchCollection.add({
       name: switchData.name,
       nodeId: switchData.nodeId,
       port: switchData.port
@@ -28,7 +28,7 @@ export class SwitchService {
   }
 
   updateSwitch(switchData: Switch) {
-    return this.productsCollection.doc<Switch>(switchData.id).update({
+    return this.switchCollection.doc<Switch>(switchData.id).update({
       name: switchData.name,
       nodeId: switchData.nodeId,
       port: switchData.port
@@ -36,7 +36,7 @@ export class SwitchService {
   }
 
   deleteSwitch(switchData: Switch){
-    return this.productsCollection.doc(switchData.id).delete();
+    return this.switchCollection.doc(switchData.id).delete();
   }
 
 }

@@ -1,9 +1,36 @@
-<ion-header>
-  <ion-toolbar>
-      <ion-title>{{houseId}}</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+    <ion-list *ngIf="uid == casa.owner">
+        <ion-item *ngIf="!casa.membros.length > 0">
+            <ion-label style="text-align: center;">Você não possue Membros em sua Casa<br>Click no + para adicionar um
+                agora</ion-label>
+        </ion-item>
+        <ion-item-sliding *ngFor="let item of casa.membros">
+            <ion-item>
+                <ion-label>Usuario:
+                    <br>{{item}}
+                </ion-label>
+            </ion-item>
+
+            <ion-item-options side="end">
+                <ion-item-option color="danger" button (click)="deleteMembro(item)">
+                    <ion-icon slot="top" name="trash"></ion-icon>
+                    Excluir
+                </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+
+    <ion-list *ngIf="uid != casa.owner && ready == 'ready'">
+        <ion-item>
+            <ion-label style="text-align: center;" color="danger">Você não possue permissão<br>para administrar membros</ion-label>
+        </ion-item>
+    </ion-list>
+
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+        <ion-fab-button (click)="addAlert()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
 
 </ion-content>
