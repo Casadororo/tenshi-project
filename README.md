@@ -1,2 +1,2 @@
 # tenshi-project
-A simple TCC OIT for houses
+A simple TCC IOT for houses
